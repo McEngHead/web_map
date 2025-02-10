@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>입찰 계산기</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    </style>
+</head>
+<body class="w3-container w3-padding-24">
+    <div class="w3-row w3-center">
+        <div class="w3-col w3-center">
+			<form class="w3-center">
+			  <input class="w3-radio" type="radio" name="class1" value="local" checked>
+			  <label>지자체</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  <input class="w3-radio" type="radio" name="class1" value="state">
+			  <label>국 가</label>
+			</form>
+			<br><br>
+			<label>입찰액(억원, VAT포함): <input type="number" id="input_amount" class="w3-input w3-center w3-light-grey"></label>
+            <label>PQ점수: <input type="number" id="inputA" class="w3-input w3-center w3-light-grey" oninput="calculate2()"></label>
+            <label>투찰율: <input type="number" id="inputB" class="w3-input w3-center w3-light-grey" oninput="calculate()"></label>
+			<br>
+            <button onclick="calculate()" class="w3-btn w3-round-large w3-blue w3-center">확  인</button>
+            <button onclick="reset_all()" class="w3-btn w3-round-large w3-orange w3-center">Reset</button>
+            <span id="result"></span>
+        </div>
+
+    </div>
+	<br>
+	<h3 id="demo" class="w3-text w3-center"></h3>
+
+	<script>
+    function calculate2() {
+	const input_amount = document.getElementById('input_amount').value / 1.1 ;
+	
+	var at = document.getElementById('inputA').value;
+    <!-- const BB = document.getElementById('inputB').value; -->
+	
+	var select_class = document.querySelector('input[name="class1"]:checked').value;
+	
+	if (select_class == 'local'){
+		if(input_amount < 5){
+			x = 88-(( at * 0.34+66)-95)/4;
+			document.getElementById('inputB').value = x;
+		}
+		else if(input_amount >= 5 && input_amount < 10){
+			x = 88-(( at * 0.44+56)-95)/2;
+			document.getElementById('inputB').value = x;
+		}
+		else if(input_amount >= 10){
+			x = 88-(( at * 0.64+36)-92);
+			document.getElementById('inputB').value = x;
+		}
+    }
+	else{
+		if(input_amount < 10){
+			x = 88-((at*0.7+30)-95)/2;
+			document.getElementById('inputB').value = x;
+		}
+		else if(input_amount >= 10 && input_amount < 30){
+			x = 88-((at*0.8+20)-90)/2;
+			document.getElementById('inputB').value = x;
+		}
+		else if(input_amount >= 30){
+			x = 88-((at*0.8+20)-85)/2;
+			document.getElementById('inputB').value = x;
+		}
+    }
+	}
+	</script>
+	
+	
+	
+	
+	
+	
+    <script>
+    function calculate() {
+	const input_amount = document.getElementById('input_amount').value / 1.1 ;
+	
+	const AA = document.getElementById('inputA').value;
+    const BB = document.getElementById('inputB').value;
+	var select_class = document.querySelector('input[name="class1"]:checked').value;
+	
+	<!-- 지자체 -->
+	if (select_class == 'local'){
+		if(input_amount < 5){
+			var x = AA * 0.34 + 66 - Math.abs(88 - BB) * 4;
+			if(x >= 95) {
+				text_in = '95이상(' + x.toFixed(2) + ') : O.K';
+				document.getElementById('demo').innerText = text_in;
+			}
+			else{
+				text_in = '95미만(' + x.toFixed(2) + ') : N.G';
+				document.getElementById('demo').innerText = text_in;
+			}
+		}
+		else if(input_amount >= 5 && input_amount < 10){
+			var x = AA * 0.44 + 56 - Math.abs(88 - BB) * 2;
+			if(x >= 95) {
+				text_in = '95이상(' + x.toFixed(2) + ') : O.K';
+				document.getElementById('demo').innerText = text_in;
+			}
+			else{
+				text_in = '95미만(' + x.toFixed(2) + ') : N.G';
+				document.getElementById('demo').innerText = text_in;
+			}
+		}
+		else if(input_amount >= 10){
+			var x = AA * 0.64 + 36 - Math.abs(88 - BB);
+			if(x >= 92) {
+				text_in = '92이상(' + x.toFixed(2) + ') : O.K';
+				document.getElementById('demo').innerText = text_in;
+			}
+			else{
+				text_in = '92미만(' + x.toFixed(2) + ') : N.G';
+				document.getElementById('demo').innerText = text_in;
+			}
+		}
+    }
+	<!-- 국가 -->
+	else{
+		if(input_amount < 10){
+			var x = AA * 0.7 + 30 - Math.abs(88 - BB) * 2;
+			if(x > 95) {
+				text_in = '95이상(' + x.toFixed(2) + ') : O.K';
+				document.getElementById('demo').innerText = text_in;
+			}
+			else{
+				text_in = '95미만(' + x.toFixed(2) + ') : N.G';
+				document.getElementById('demo').innerText = text_in;
+			}
+		}
+		else if(input_amount >= 10 && input_amount < 30){
+			var x = AA * 0.8 + 20 - Math.abs(88 - BB) * 2;
+			if(x > 90) {
+				text_in = '90이상(' + x.toFixed(2) + ') : O.K';
+				document.getElementById('demo').innerText = text_in;
+			}
+			else{
+				text_in = '90미만(' + x.toFixed(2) + ') : N.G';
+				document.getElementById('demo').innerText = text_in;
+			}
+		}
+		else if(input_amount >= 30){
+			var x = AA * 0.8 + 20 - Math.abs(88 - BB) * 2;
+			if(x > 85) {
+				text_in = '85이상(' + x.toFixed(2) + ') : O.K';
+				document.getElementById('demo').innerText = text_in;
+			}
+			else{
+				text_in = '85미만(' + x.toFixed(2) + ') : N.G';
+				document.getElementById('demo').innerText = text_in;
+			}
+		}
+    }
+	}
+    </script>
+    <script>
+    function reset_all() {
+	location.reload(true);
+    }
+    </script>
+</body>
+</html>
