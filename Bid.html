@@ -125,7 +125,7 @@
 	else{
 		if(input_amount < 10){
 			var x = AA * 0.7 + 30 - Math.abs(88 - BB) * 2;
-			if(x > 95) {
+			if(x >= 95) {
 				text_in = '95이상(' + x.toFixed(2) + ') : O.K';
 				document.getElementById('demo').innerText = text_in;
 			}
@@ -136,7 +136,7 @@
 		}
 		else if(input_amount >= 10 && input_amount < 30){
 			var x = AA * 0.8 + 20 - Math.abs(88 - BB) * 2;
-			if(x > 90) {
+			if(x >= 90) {
 				text_in = '90이상(' + x.toFixed(2) + ') : O.K';
 				document.getElementById('demo').innerText = text_in;
 			}
@@ -147,7 +147,7 @@
 		}
 		else if(input_amount >= 30){
 			var x = AA * 0.8 + 20 - Math.abs(88 - BB) * 2;
-			if(x > 85) {
+			if(x >= 85) {
 				text_in = '85이상(' + x.toFixed(2) + ') : O.K';
 				document.getElementById('demo').innerText = text_in;
 			}
